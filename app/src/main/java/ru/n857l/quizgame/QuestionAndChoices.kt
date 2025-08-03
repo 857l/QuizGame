@@ -1,4 +1,6 @@
 package ru.n857l.quizgame
 
-class QuestionAndChoices {
-}
+data class QuestionAndChoices(
+    val correctIndex: Int,
+    val userChoiceIndex: Int
+)
