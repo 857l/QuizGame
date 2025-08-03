@@ -1,4 +1,7 @@
 package ru.n857l.quizgame
 
-class GameViewModel {
+class GameViewModel (
+    val gameRepository: GameRepository
+) {
+
 }

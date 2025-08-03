@@ -1,5 +1,6 @@
 package ru.n857l.quizgame
 
-class CorrectAndUserChoiceIndexes {
-
-}
+data class CorrectAndUserChoiceIndexes(
+    val correctIndex: Int,
+    val userChoiceIndex: Int
+)
