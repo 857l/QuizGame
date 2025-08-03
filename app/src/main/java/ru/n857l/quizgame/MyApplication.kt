@@ -1,7 +1,6 @@
 package ru.n857l.quizgame
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 
 class MyApplication : Application() {
 
@@ -9,6 +8,6 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        viewModel = GameViewModel(GameRepository())
+        viewModel = GameViewModel(GameRepository.Base())
     }
 }
