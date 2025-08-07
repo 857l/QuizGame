@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
             uiState = viewModel.init()
         } else {
             uiState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                savedInstanceState.getSerializable("uiState", GameUiState::class.java) as GameUiState
+                savedInstanceState.getSerializable(UISTATEKEY, GameUiState::class.java) as GameUiState
             }else{
-                savedInstanceState.getSerializable("uiState") as GameUiState
+                savedInstanceState.getSerializable(UISTATEKEY) as GameUiState
             }
         }
 
@@ -62,7 +62,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putSerializable("uiState", uiState)
+        outState.putSerializable(UISTATEKEY, uiState)
+    }
+
+    companion object {
+        private const val UISTATEKEY = "uiState"
     }
 
 }
