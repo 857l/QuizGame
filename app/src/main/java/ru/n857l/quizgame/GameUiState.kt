@@ -2,8 +2,9 @@ package ru.n857l.quizgame
 
 import android.view.View
 import ru.n857l.quizgame.databinding.ActivityMainBinding
+import java.io.Serializable
 
-interface GameUiState {
+interface GameUiState : Serializable {
 
     fun update(binding: ActivityMainBinding)
 
