@@ -8,6 +8,14 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        viewModel = GameViewModel(GameRepository.Base())
+
+        val sharedPreferences = getSharedPreferences("QuizAppData", MODE_PRIVATE)
+
+        viewModel = GameViewModel(
+            GameRepository.Base(
+                IntCache.Base(sharedPreferences, "index", 0),
+                IntCache.Base(sharedPreferences, "userChoiceIndex", -1)
+            )
+        )
     }
 }
