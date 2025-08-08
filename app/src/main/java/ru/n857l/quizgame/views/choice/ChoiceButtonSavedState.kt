@@ -8,15 +8,17 @@ import ru.n857l.quizgame.ChoiceUiState
 
 class ChoiceButtonSavedState : View.BaseSavedState {
 
-    private lateinit var state : ChoiceUiState
+    private lateinit var state: ChoiceUiState
 
     constructor(superState: Parcelable) : super(superState)
 
-    private constructor(parcelIn: Parcel) : super(parcelIn){
+    private constructor(parcelIn: Parcel) : super(parcelIn) {
         state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            parcelIn.readSerializable(ChoiceUiState::class.java.classLoader, ChoiceUiState::class.java) as ChoiceUiState
-        }
-        else {
+            parcelIn.readSerializable(
+                ChoiceUiState::class.java.classLoader,
+                ChoiceUiState::class.java
+            ) as ChoiceUiState
+        } else {
             parcelIn.readSerializable() as ChoiceUiState
         }
     }

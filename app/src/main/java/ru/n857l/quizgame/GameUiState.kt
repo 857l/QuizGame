@@ -1,6 +1,5 @@
 package ru.n857l.quizgame
 
-import android.view.View
 import ru.n857l.quizgame.views.choice.UpdateChoiceButton
 import ru.n857l.quizgame.views.question.UpdateText
 import ru.n857l.quizgame.views.visibilityButton.UpdateVisibility

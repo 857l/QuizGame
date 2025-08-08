@@ -1,6 +1,5 @@
 package ru.n857l.quizgame
 
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = (application as MyApplication).viewModel
 
-        val update : () -> Unit = {
+        val update: () -> Unit = {
             uiState.update(
                 binding.questionTextView,
                 binding.firstChoiceButton,
