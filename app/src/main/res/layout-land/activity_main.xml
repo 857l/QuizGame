@@ -12,75 +12,75 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <TextView
-            android:layout_gravity="top"
-            android:layout_margin="16dp"
+        <ru.n857l.quizgame.views.question.QuestionTextView
             android:id="@+id/questionTextView"
-            android:gravity="center"
-            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:padding="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             tools:text="Some question herehghghghgfhghgfhgfh" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_margin="16dp"
-            android:layout_gravity="bottom"
+        <ru.n857l.quizgame.views.visibilityButton.VisibilityButton
             android:id="@+id/checkButton"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp"
             android:background="@color/purple"
-            android:text="@string/check"/>
+            android:text="@string/check" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_margin="16dp"
-            android:layout_gravity="bottom"
+        <ru.n857l.quizgame.views.visibilityButton.VisibilityButton
             android:id="@+id/nextButton"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp"
             android:background="@color/pink"
-            android:text="@string/next"/>
+            android:text="@string/next" />
 
     </FrameLayout>
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
-        android:layout_weight="1">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ru.n857l.quizgame.views.choice.ChoiceButton
             android:id="@+id/firstChoiceButton"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ru.n857l.quizgame.views.choice.ChoiceButton
             android:id="@+id/secondChoiceButton"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ru.n857l.quizgame.views.choice.ChoiceButton
             android:id="@+id/thirdChoiceButton"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ru.n857l.quizgame.views.choice.ChoiceButton
             android:id="@+id/forthChoiceButton"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp" />
 
 
     </LinearLayout>

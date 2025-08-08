@@ -21,52 +21,48 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = (application as MyApplication).viewModel
 
+        val update : () -> Unit = {
+            uiState.update(
+                binding.questionTextView,
+                binding.firstChoiceButton,
+                binding.secondChoiceButton,
+                binding.thirdChoiceButton,
+                binding.forthChoiceButton,
+                binding.checkButton,
+                binding.nextButton
+            )
+
+        }
+
         binding.firstChoiceButton.setOnClickListener {
             uiState = viewModel.chooseFirst()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.secondChoiceButton.setOnClickListener {
             uiState = viewModel.chooseSecond()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.thirdChoiceButton.setOnClickListener {
             uiState = viewModel.chooseThird()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.forthChoiceButton.setOnClickListener {
             uiState = viewModel.chooseForth()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.checkButton.setOnClickListener {
             uiState = viewModel.check()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.nextButton.setOnClickListener {
             uiState = viewModel.next()
-            uiState.update(binding = binding)
+            update.invoke()
         }
 
-        if (savedInstanceState == null) {
-            uiState = viewModel.init()
-        } else {
-            uiState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                savedInstanceState.getSerializable(UISTATEKEY, GameUiState::class.java) as GameUiState
-            }else{
-                savedInstanceState.getSerializable(UISTATEKEY) as GameUiState
-            }
-        }
+        uiState = viewModel.init(savedInstanceState == null)
 
-        uiState.update(binding = binding)
+        update.invoke()
 
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(UISTATEKEY, uiState)
-    }
-
-    companion object {
-        private const val UISTATEKEY = "uiState"
     }
 
 }

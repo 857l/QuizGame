@@ -1,30 +1,35 @@
 package ru.n857l.quizgame
 
-import android.graphics.Color
-import androidx.appcompat.widget.AppCompatButton
+import ru.n857l.quizgame.views.choice.UpdateChoiceButton
 import java.io.Serializable
 
 interface ChoiceUiState : Serializable {
 
-    fun update(button: AppCompatButton)
+    fun update(update: UpdateChoiceButton)
 
     abstract class Abstract(
-        private val value: String,
         private val color: String,
         private val clickable: Boolean = false,
         private val enabled: Boolean = true
     ) : ChoiceUiState {
-        override fun update(button: AppCompatButton) = with(button) {
-            text = value
-            isEnabled = enabled
-            isClickable = clickable
-            setBackgroundColor(Color.parseColor(color))
+        override fun update(update: UpdateChoiceButton) {
+            update.update(color, clickable, enabled)
         }
     }
 
-    data class NotAvailableToChoose(private val text: String) : Abstract(text, "#75797E", enabled = false)
-    data class AvailableToChoose(private val text: String) : Abstract(text, "#5367B7", true)
-    data class Correct(private val text: String) : Abstract(text, "#13CC2E")
-    data class InCorrect(private val text: String) : Abstract(text, "#DD3A3D")
+
+    object NotAvailableToChoose : Abstract("#75797E", enabled = false)
+
+    data class Initial(private val text: String) : Abstract("#5367B7", true) {
+
+        override fun update(update: UpdateChoiceButton) {
+            super.update(update)
+            update.update(text)
+        }
+    }
+
+    object AvailableToChoose : Abstract("#5367B7", true)
+    object Correct : Abstract("#13CC2E")
+    object Incorrect : Abstract("#DD3A3D")
 
 }
