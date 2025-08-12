@@ -6,15 +6,17 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 
 class VisibilityButton : AppCompatButton, UpdateVisibility {
+
+    private lateinit var state: VisibilityUiState
+
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
     )
-
-    private lateinit var state: VisibilityUiState
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {
@@ -41,6 +43,7 @@ class VisibilityButton : AppCompatButton, UpdateVisibility {
 }
 
 interface UpdateVisibility {
+
     fun update(visibility: Int)
 
     fun update(state: VisibilityUiState)

@@ -1,6 +1,5 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.views.choice
 
-import ru.n857l.quizgame.views.choice.UpdateChoiceButton
 import java.io.Serializable
 
 interface ChoiceUiState : Serializable {

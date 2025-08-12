@@ -1,5 +1,7 @@
 package ru.n857l.quizgame
 
+import ru.n857l.quizgame.views.choice.ChoiceUiState
+
 class GameViewModel(
     private val repository: GameRepository
 ) {
@@ -60,7 +62,7 @@ class GameViewModel(
         val data = repository.questionAndChoices()
         val correctAndUserChoiceIndexes = repository.check()
         return GameUiState.AnswerChecked(
-            data.choices.mapIndexed { index, choice ->
+            data.choices.mapIndexed { index, _ ->
                 if (correctAndUserChoiceIndexes.correctIndex == index)
                     ChoiceUiState.Correct
                 else if (correctAndUserChoiceIndexes.userChoiceIndex == index) {
@@ -78,8 +80,8 @@ class GameViewModel(
         return init()
     }
 
-    fun init(firstFun: Boolean = true): GameUiState {
-        if (firstFun) {
+    fun init(firstRun: Boolean = true): GameUiState {
+        if (firstRun) {
             val data = repository.questionAndChoices()
             return GameUiState.AskedQuestion(
                 data.question,

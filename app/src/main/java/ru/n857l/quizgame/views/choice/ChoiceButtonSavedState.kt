@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
-import ru.n857l.quizgame.ChoiceUiState
 
 class ChoiceButtonSavedState : View.BaseSavedState {
 
