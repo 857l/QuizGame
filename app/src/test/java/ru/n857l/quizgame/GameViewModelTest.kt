@@ -4,6 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
+import ru.n857l.quizgame.views.choice.ChoiceUiState
 
 class GameViewModelTest {
 

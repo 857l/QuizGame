@@ -5,8 +5,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import ru.n857l.quizgame.game.GamePage
@@ -32,7 +30,9 @@ class ScenarioTest {
         )
     }
 
-
+    /**
+     * QGTC-01
+     */
     @Test
     fun caseNumber1() {
         gamePage.assertAskedQuestionState()
@@ -50,6 +50,9 @@ class ScenarioTest {
         gamePage.assertAnswerCheckedStateFirstIsCorrect()
     }
 
+    /**
+     * QGTC-02
+     */
     @Test
     fun caseNumber2() {
         gamePage.assertAskedQuestionState()
@@ -67,19 +70,21 @@ class ScenarioTest {
         gamePage.assertSecondChoiceMadeState()
 
         gamePage.clickCheck()
-        gamePage.assertAnswerCheckedStateFirstIsCorrect()
+        gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
         activityScenarioRule.scenario.recreate()
-        gamePage.assertAnswerCheckedStateFirstIsCorrect()
+        gamePage.assertAnswerCheckedStateFirstIsCorrectSecondIsIncorrect()
 
         gamePage.clickNext()
 
         gamePage = GamePage(
-            question = "What color is the grass?",
-            choices = listOf("blue", "green", "red", "yellow")
+            question = "What color is the grass?", choices = listOf(
+                "green", "blue", "yellow", "red"
+            )
         )
-
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
         gamePage.assertAskedQuestionState()
     }
+
+
 }

@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
                 binding.secondChoiceButton,
                 binding.thirdChoiceButton,
                 binding.forthChoiceButton,
-                binding.checkButton,
-                binding.nextButton
+                binding.nextButton,
+                binding.checkButton
             )
 
         }
