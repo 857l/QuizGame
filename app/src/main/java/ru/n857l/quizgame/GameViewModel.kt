@@ -8,7 +8,7 @@ class GameViewModel(
         repository.saveUserChoice(0)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question.mapIndexed { index, _ ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 0)
                     ChoiceUiState.NotAvailableToChoose
                 else
@@ -21,7 +21,7 @@ class GameViewModel(
         repository.saveUserChoice(1)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question.mapIndexed { index, _ ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 1)
                     ChoiceUiState.NotAvailableToChoose
                 else
@@ -34,7 +34,7 @@ class GameViewModel(
         repository.saveUserChoice(2)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question.mapIndexed { index, _ ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 2)
                     ChoiceUiState.NotAvailableToChoose
                 else
@@ -47,7 +47,7 @@ class GameViewModel(
         repository.saveUserChoice(3)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question.mapIndexed { index, _ ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 3)
                     ChoiceUiState.NotAvailableToChoose
                 else

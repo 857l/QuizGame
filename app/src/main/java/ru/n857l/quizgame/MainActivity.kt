@@ -7,18 +7,16 @@ import ru.n857l.quizgame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel: GameViewModel
-    lateinit var binding: ActivityMainBinding
     lateinit var uiState: GameUiState
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = (application as MyApplication).viewModel
+        val viewModel = (application as MyApplication).viewModel
 
         val update: () -> Unit = {
             uiState.update(

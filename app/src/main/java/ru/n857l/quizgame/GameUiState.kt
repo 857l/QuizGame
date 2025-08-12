@@ -53,7 +53,7 @@ interface GameUiState : Serializable {
         }
     }
 
-    data class ChoiceMade(
+    data class  ChoiceMade(
         private val choices: List<ChoiceUiState>
     ) : GameUiState {
         override fun update(

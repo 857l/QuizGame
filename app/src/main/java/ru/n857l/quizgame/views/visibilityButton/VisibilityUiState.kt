@@ -13,5 +13,5 @@ interface VisibilityUiState : Serializable {
     }
 
     object Visible : Abstract(View.VISIBLE)
-    object Gone : Abstract(View.VISIBLE)
+    object Gone : Abstract(View.GONE)
 }
