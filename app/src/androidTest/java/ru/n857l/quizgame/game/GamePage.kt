@@ -118,4 +118,8 @@ class GamePage(
     fun clickNext() {
         nextUi.click()
     }
+
+    fun assertNotVisible() {
+        questionUi.assertDoesNotExist()
+    }
 }
