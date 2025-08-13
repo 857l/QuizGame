@@ -45,10 +45,10 @@ interface GameUiState : Serializable {
             checkButton: UpdateVisibility
         ) {
             questionTextView.update(question)
-            firstChoiceButton.update(ChoiceUiState.Initial(choices[0]))
-            secondChoiceButton.update(ChoiceUiState.Initial(choices[1]))
-            thirdChoiceButton.update(ChoiceUiState.Initial(choices[2]))
-            fourthChoiceButton.update(ChoiceUiState.Initial(choices[3]))
+            firstChoiceButton.updateState(ChoiceUiState.Initial(choices[0]))
+            secondChoiceButton.updateState(ChoiceUiState.Initial(choices[1]))
+            thirdChoiceButton.updateState(ChoiceUiState.Initial(choices[2]))
+            fourthChoiceButton.updateState(ChoiceUiState.Initial(choices[3]))
             nextButton.update(VisibilityUiState.Gone)
             checkButton.update(VisibilityUiState.Gone)
         }
@@ -66,10 +66,10 @@ interface GameUiState : Serializable {
             nextButton: UpdateVisibility,
             checkButton: UpdateVisibility
         ) {
-            firstChoiceButton.update(choices[0])
-            secondChoiceButton.update(choices[1])
-            thirdChoiceButton.update(choices[2])
-            fourthChoiceButton.update(choices[3])
+            firstChoiceButton.updateState(choices[0])
+            secondChoiceButton.updateState(choices[1])
+            thirdChoiceButton.updateState(choices[2])
+            fourthChoiceButton.updateState(choices[3])
             checkButton.update(VisibilityUiState.Visible)
         }
     }
@@ -86,10 +86,10 @@ interface GameUiState : Serializable {
             nextButton: UpdateVisibility,
             checkButton: UpdateVisibility
         ) {
-            firstChoiceButton.update(choices[0])
-            secondChoiceButton.update(choices[1])
-            thirdChoiceButton.update(choices[2])
-            fourthChoiceButton.update(choices[3])
+            firstChoiceButton.updateState(choices[0])
+            secondChoiceButton.updateState(choices[1])
+            thirdChoiceButton.updateState(choices[2])
+            fourthChoiceButton.updateState(choices[3])
             checkButton.update(VisibilityUiState.Gone)
             nextButton.update(VisibilityUiState.Visible)
         }

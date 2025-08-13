@@ -20,12 +20,12 @@ class ChoiceButton : AppCompatButton, UpdateChoiceButton {
 
     private lateinit var state: ChoiceUiState
 
-    override fun update(state: ChoiceUiState) {
+    override fun updateState(state: ChoiceUiState) {
         this.state = state
         state.update(this)
     }
 
-    override fun update(color: String, clickable: Boolean, enabled: Boolean) {
+    override fun updateChoiceButton(color: String, clickable: Boolean, enabled: Boolean) {
         isEnabled = enabled
         isClickable = clickable
         setBackgroundColor(Color.parseColor(color))
@@ -46,7 +46,7 @@ class ChoiceButton : AppCompatButton, UpdateChoiceButton {
     override fun onRestoreInstanceState(state: Parcelable?) {
         val restoredState = state as ChoiceButtonSavedState
         super.onRestoreInstanceState(restoredState.superState)
-        update(restoredState.restore())
+        updateState(restoredState.restore())
     }
 
 
@@ -54,9 +54,9 @@ class ChoiceButton : AppCompatButton, UpdateChoiceButton {
 
 interface UpdateChoiceButton : UpdateText {
 
-    fun update(state: ChoiceUiState)
+    fun updateState(state: ChoiceUiState)
 
-    fun update(
+    fun updateChoiceButton(
         color: String,
         clickable: Boolean,
         enabled: Boolean

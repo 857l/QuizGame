@@ -12,7 +12,7 @@ interface ChoiceUiState : Serializable {
         private val enabled: Boolean = true
     ) : ChoiceUiState {
         override fun update(update: UpdateChoiceButton) {
-            update.update(color, clickable, enabled)
+            update.updateChoiceButton(color, clickable, enabled)
         }
     }
 
