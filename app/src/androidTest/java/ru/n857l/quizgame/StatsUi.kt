@@ -1,4 +1,4 @@
-package ru.n857l.quizgame.game
+package ru.n857l.quizgame
 
 import android.view.View
 import android.widget.TextView
@@ -10,32 +10,32 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
-import ru.n857l.quizgame.R
+import org.hamcrest.CoreMatchers.allOf
 
-class QuestionUi(
-    text: String,
+class StatsUi(
+    incorrects: Int,
+    corrects: Int,
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
 ) {
 
-    private val interaction: ViewInteraction = onView(
-        allOf(
-            containerIdMatcher,
-            containerClassTypeMatcher,
-            withId(R.id.questionTextView),
-            withText(text),
-            isAssignableFrom(TextView::class.java)
+    private val interaction: ViewInteraction =
+        onView(
+            allOf(
+                withId(R.id.statsTextView),
+                isAssignableFrom(TextView::class.java),
+                withText("Corrects: $corrects\nIncorrects: $incorrects"),
+                containerIdMatcher,
+                containerClassTypeMatcher
+            )
         )
-    )
 
-    fun assertTextVisible() {
+    fun assertVisible() {
         interaction.check(matches(isDisplayed()))
     }
 
     fun assertDoesNotExist() {
         interaction.check(doesNotExist())
     }
-
 }
