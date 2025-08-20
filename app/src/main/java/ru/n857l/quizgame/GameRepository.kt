@@ -1,5 +1,7 @@
 package ru.n857l.quizgame
 
+import ru.n857l.quizgame.core.IntCache
+
 interface GameRepository {
 
     fun questionAndChoices(): QuestionAndChoices

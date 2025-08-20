@@ -1,6 +1,8 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.core
 
 import android.app.Application
+import ru.n857l.quizgame.GameRepository
+import ru.n857l.quizgame.GameViewModel
 
 class MyApplication : Application() {
 

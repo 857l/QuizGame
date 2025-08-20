@@ -2,4 +2,5 @@
     <string name="app_name" translatable="false">QuizGame</string>
     <string name="check" translatable="false">check</string>
     <string name="next" translatable="false">next</string>
+    <string name="new_game">Start a new game</string>
 </resources>

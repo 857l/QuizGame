@@ -7,6 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Before
 import org.junit.Rule
+import ru.n857l.quizgame.core.MainActivity
 import ru.n857l.quizgame.game.GamePage
 
 /**

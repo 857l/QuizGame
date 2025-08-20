@@ -1,9 +1,10 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.core
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import ru.n857l.quizgame.databinding.ActivityMainBinding
+import ru.n857l.quizgame.GameUiState
 
 class MainActivity : AppCompatActivity() {
 
