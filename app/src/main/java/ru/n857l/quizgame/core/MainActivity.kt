@@ -3,64 +3,33 @@ package ru.n857l.quizgame.core
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import ru.n857l.quizgame.databinding.ActivityMainBinding
-import ru.n857l.quizgame.GameUiState
+import ru.n857l.quizgame.R
+import ru.n857l.quizgame.game.GameScreen
+import ru.n857l.quizgame.game.NavigateToGame
+import ru.n857l.quizgame.stats.GameOverScreen
+import ru.n857l.quizgame.stats.NavigateToGameOver
+import ru.n857l.quizgame.views.Screen
 
-class MainActivity : AppCompatActivity() {
-
-    lateinit var uiState: GameUiState
+class MainActivity : AppCompatActivity(), Navigate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        val viewModel = (application as MyApplication).viewModel
-
-        val update: () -> Unit = {
-            uiState.update(
-                binding.questionTextView,
-                binding.firstChoiceButton,
-                binding.secondChoiceButton,
-                binding.thirdChoiceButton,
-                binding.forthChoiceButton,
-                binding.nextButton,
-                binding.checkButton
-            )
-
-        }
-
-        binding.firstChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseFirst()
-            update.invoke()
-        }
-        binding.secondChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseSecond()
-            update.invoke()
-        }
-        binding.thirdChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseThird()
-            update.invoke()
-        }
-        binding.forthChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseForth()
-            update.invoke()
-        }
-        binding.checkButton.setOnClickListener {
-            uiState = viewModel.check()
-            update.invoke()
-        }
-        binding.nextButton.setOnClickListener {
-            uiState = viewModel.next()
-            update.invoke()
-        }
-
-        uiState = viewModel.init(savedInstanceState == null)
-
-        update.invoke()
-
+        if (savedInstanceState == null)
+            navigateToGame()
     }
 
+    override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
+}
+
+interface Navigate : NavigateToGame, NavigateToGameOver {
+
+    fun navigate(screen: Screen)
+
+    override fun navigateToGameOver() = navigate(GameOverScreen)
+
+    override fun navigateToGame() = navigate(GameScreen)
 }
