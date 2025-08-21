@@ -3,6 +3,7 @@ package ru.n857l.quizgame.core
 import android.app.Application
 import ru.n857l.quizgame.GameRepository
 import ru.n857l.quizgame.GameViewModel
+import ru.n857l.quizgame.stats.GameOverViewModel
 
 class MyApplication : Application() {
 

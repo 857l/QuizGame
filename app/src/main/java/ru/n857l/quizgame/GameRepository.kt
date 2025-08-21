@@ -12,6 +12,8 @@ interface GameRepository {
 
     fun next()
 
+    fun isLastQuestion(): Boolean
+
     class Base(
         private val index: IntCache,
         private val userChoiceIndex: IntCache,
@@ -46,10 +48,10 @@ interface GameRepository {
 
         override fun next() {
             userChoiceIndex.save(-1)
-            if (index.read() + 1 == list.size)
-                index.save(0)
-            else
+            if (!isLastQuestion())
                 index.save(index.read() + 1)
         }
+
+        override fun isLastQuestion() = index.read() + 1 == list.size
     }
 }

@@ -41,7 +41,7 @@ class GameFragment : Fragment() {
                 binding.nextButton,
                 binding.checkButton
             )
-
+            (requireActivity() as NavigateToGameOver).navigateToGameOver()
         }
 
         binding.firstChoiceButton.setOnClickListener {
@@ -65,9 +65,8 @@ class GameFragment : Fragment() {
             update.invoke()
         }
         binding.nextButton.setOnClickListener {
-            (requireActivity() as NavigateToGameOver).navigateToGameOver()
-//            uiState = viewModel.next()
-//            update.invoke()
+            uiState = viewModel.next()
+            update.invoke()
         }
 
         uiState = viewModel.init(savedInstanceState == null)

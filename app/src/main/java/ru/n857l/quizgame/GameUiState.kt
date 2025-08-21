@@ -1,5 +1,6 @@
 package ru.n857l.quizgame
 
+import ru.n857l.quizgame.stats.NavigateToGameOver
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 import ru.n857l.quizgame.views.choice.UpdateChoiceButton
 import ru.n857l.quizgame.views.question.UpdateText
@@ -17,18 +18,15 @@ interface GameUiState : Serializable {
         fourthChoiceButton: UpdateChoiceButton,
         nextButton: UpdateVisibility,
         checkButton: UpdateVisibility
-    )
+    ) = Unit
 
-    object Empty : GameUiState {
-        override fun update(
-            questionTextView: UpdateText,
-            firstChoiceButton: UpdateChoiceButton,
-            secondChoiceButton: UpdateChoiceButton,
-            thirdChoiceButton: UpdateChoiceButton,
-            fourthChoiceButton: UpdateChoiceButton,
-            nextButton: UpdateVisibility,
-            checkButton: UpdateVisibility
-        ) = Unit
+    fun navigate(navigate: NavigateToGameOver) = Unit
+
+    object Empty : GameUiState
+
+    object Finish : GameUiState {
+
+        override fun navigate(navigate: NavigateToGameOver) = navigate.navigateToGameOver()
     }
 
     data class AskedQuestion(
