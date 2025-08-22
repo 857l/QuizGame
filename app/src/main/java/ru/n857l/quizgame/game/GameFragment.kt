@@ -1,22 +1,35 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.game
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import ru.n857l.quizgame.databinding.ActivityMainBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import ru.n857l.quizgame.GameUiState
+import ru.n857l.quizgame.core.MyApplication
+import ru.n857l.quizgame.databinding.FragmentGameBinding
+import ru.n857l.quizgame.stats.NavigateToGameOver
 
-class MainActivity : AppCompatActivity() {
+class GameFragment : Fragment() {
 
-    lateinit var uiState: GameUiState
+    private var _binding: FragmentGameBinding? = null
+    private val binding
+        get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = (application as MyApplication).viewModel
+        lateinit var uiState: GameUiState
+        val viewModel = (requireActivity().application as MyApplication).gameViewModel
 
         val update: () -> Unit = {
             uiState.update(
@@ -28,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 binding.nextButton,
                 binding.checkButton
             )
-
+            (requireActivity() as NavigateToGameOver).navigateToGameOver()
         }
 
         binding.firstChoiceButton.setOnClickListener {
@@ -59,7 +72,10 @@ class MainActivity : AppCompatActivity() {
         uiState = viewModel.init(savedInstanceState == null)
 
         update.invoke()
-
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

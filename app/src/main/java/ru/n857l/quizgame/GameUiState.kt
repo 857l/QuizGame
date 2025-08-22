@@ -1,5 +1,6 @@
 package ru.n857l.quizgame
 
+import ru.n857l.quizgame.stats.NavigateToGameOver
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 import ru.n857l.quizgame.views.choice.UpdateChoiceButton
 import ru.n857l.quizgame.views.question.UpdateText
@@ -17,18 +18,15 @@ interface GameUiState : Serializable {
         fourthChoiceButton: UpdateChoiceButton,
         nextButton: UpdateVisibility,
         checkButton: UpdateVisibility
-    )
+    ) = Unit
 
-    object Empty : GameUiState {
-        override fun update(
-            questionTextView: UpdateText,
-            firstChoiceButton: UpdateChoiceButton,
-            secondChoiceButton: UpdateChoiceButton,
-            thirdChoiceButton: UpdateChoiceButton,
-            fourthChoiceButton: UpdateChoiceButton,
-            nextButton: UpdateVisibility,
-            checkButton: UpdateVisibility
-        ) = Unit
+    fun navigate(navigate: NavigateToGameOver) = Unit
+
+    object Empty : GameUiState
+
+    object Finish : GameUiState {
+
+        override fun navigate(navigate: NavigateToGameOver) = navigate.navigateToGameOver()
     }
 
     data class AskedQuestion(
@@ -45,10 +43,10 @@ interface GameUiState : Serializable {
             checkButton: UpdateVisibility
         ) {
             questionTextView.update(question)
-            firstChoiceButton.update(ChoiceUiState.Initial(choices[0]))
-            secondChoiceButton.update(ChoiceUiState.Initial(choices[1]))
-            thirdChoiceButton.update(ChoiceUiState.Initial(choices[2]))
-            fourthChoiceButton.update(ChoiceUiState.Initial(choices[3]))
+            firstChoiceButton.updateState(ChoiceUiState.Initial(choices[0]))
+            secondChoiceButton.updateState(ChoiceUiState.Initial(choices[1]))
+            thirdChoiceButton.updateState(ChoiceUiState.Initial(choices[2]))
+            fourthChoiceButton.updateState(ChoiceUiState.Initial(choices[3]))
             nextButton.update(VisibilityUiState.Gone)
             checkButton.update(VisibilityUiState.Gone)
         }
@@ -66,10 +64,10 @@ interface GameUiState : Serializable {
             nextButton: UpdateVisibility,
             checkButton: UpdateVisibility
         ) {
-            firstChoiceButton.update(choices[0])
-            secondChoiceButton.update(choices[1])
-            thirdChoiceButton.update(choices[2])
-            fourthChoiceButton.update(choices[3])
+            firstChoiceButton.updateState(choices[0])
+            secondChoiceButton.updateState(choices[1])
+            thirdChoiceButton.updateState(choices[2])
+            fourthChoiceButton.updateState(choices[3])
             checkButton.update(VisibilityUiState.Visible)
         }
     }
@@ -86,10 +84,10 @@ interface GameUiState : Serializable {
             nextButton: UpdateVisibility,
             checkButton: UpdateVisibility
         ) {
-            firstChoiceButton.update(choices[0])
-            secondChoiceButton.update(choices[1])
-            thirdChoiceButton.update(choices[2])
-            fourthChoiceButton.update(choices[3])
+            firstChoiceButton.updateState(choices[0])
+            secondChoiceButton.updateState(choices[1])
+            thirdChoiceButton.updateState(choices[2])
+            fourthChoiceButton.updateState(choices[3])
             checkButton.update(VisibilityUiState.Gone)
             nextButton.update(VisibilityUiState.Visible)
         }

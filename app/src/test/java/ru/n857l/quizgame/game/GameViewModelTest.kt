@@ -1,9 +1,14 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.game
 
 import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
+import ru.n857l.quizgame.CorrectAndUserChoiceIndexes
+import ru.n857l.quizgame.GameRepository
+import ru.n857l.quizgame.GameUiState
+import ru.n857l.quizgame.GameViewModel
+import ru.n857l.quizgame.QuestionAndChoices
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 
 class GameViewModelTest {
@@ -48,6 +53,39 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose,
             )
         )
+        assertEquals(expected, actual)
+
+        actual = viewModel.next()
+        expected = GameUiState.AskedQuestion(
+            question = "q2",
+            choices = listOf("cd1", "cd2", "cd3", "cd4")
+        )
+        assertEquals(expected, actual)
+
+        actual = viewModel.chooseFirst()
+        expected = GameUiState.ChoiceMade(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+            )
+        )
+        assertEquals(expected, actual)
+
+        actual = viewModel.check()
+        expected = GameUiState.AnswerChecked(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.Correct,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+            )
+        )
+        assertEquals(expected, actual)
+
+        actual = viewModel.next()
+        expected = GameUiState.Finish
         assertEquals(expected, actual)
     }
 
@@ -162,7 +200,9 @@ private class FakeRepository : GameRepository {
     override fun next() {
         userChoiceIndex = -1
         index++
-        if (index == list.size)
-            index = 0
+    }
+
+    override fun isLastQuestion(): Boolean {
+        return index == list.size
     }
 }
