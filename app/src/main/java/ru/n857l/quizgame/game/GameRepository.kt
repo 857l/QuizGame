@@ -52,6 +52,6 @@ interface GameRepository {
                 index.save(index.read() + 1)
         }
 
-        override fun isLastQuestion() = index.read() + 1 == list.size
+        override fun isLastQuestion() = index.read() == list.size
     }
 }

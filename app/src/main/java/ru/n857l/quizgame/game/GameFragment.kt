@@ -40,7 +40,7 @@ class GameFragment : Fragment() {
                 binding.nextButton,
                 binding.checkButton
             )
-            (requireActivity() as NavigateToGameOver).navigateToGameOver()
+            uiState.navigate(requireActivity() as NavigateToGameOver)
         }
 
         binding.firstChoiceButton.setOnClickListener {
