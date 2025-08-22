@@ -1,4 +1,4 @@
-package ru.n857l.quizgame
+package ru.n857l.quizgame.game
 
 import ru.n857l.quizgame.core.IntCache
 

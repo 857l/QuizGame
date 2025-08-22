@@ -1,4 +1,4 @@
-package ru.n857l.quizgame.views
+package ru.n857l.quizgame.core
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

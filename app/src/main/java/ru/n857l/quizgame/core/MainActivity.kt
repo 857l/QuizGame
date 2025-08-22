@@ -8,7 +8,6 @@ import ru.n857l.quizgame.game.GameScreen
 import ru.n857l.quizgame.game.NavigateToGame
 import ru.n857l.quizgame.stats.GameOverScreen
 import ru.n857l.quizgame.stats.NavigateToGameOver
-import ru.n857l.quizgame.views.Screen
 
 class MainActivity : AppCompatActivity(), Navigate {
 

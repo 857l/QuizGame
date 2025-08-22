@@ -1,9 +1,8 @@
 package ru.n857l.quizgame.core
 
 import android.app.Application
-import ru.n857l.quizgame.GameRepository
-import ru.n857l.quizgame.GameViewModel
-import ru.n857l.quizgame.stats.GameOverViewModel
+import ru.n857l.quizgame.game.GameRepository
+import ru.n857l.quizgame.game.GameViewModel
 
 class MyApplication : Application() {
 
