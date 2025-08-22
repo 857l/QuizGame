@@ -4,7 +4,7 @@ import android.app.Application
 import ru.n857l.quizgame.game.GameRepository
 import ru.n857l.quizgame.game.GameViewModel
 
-class MyApplication : Application() {
+class QuizApp : Application() {
 
     lateinit var gameViewModel: GameViewModel
     lateinit var gameOverViewModel: GameOverViewModel
