@@ -1,14 +1,8 @@
 package ru.n857l.quizgame.game
 
+import org.junit.Assert
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
-import ru.n857l.quizgame.CorrectAndUserChoiceIndexes
-import ru.n857l.quizgame.GameRepository
-import ru.n857l.quizgame.GameUiState
-import ru.n857l.quizgame.GameViewModel
-import ru.n857l.quizgame.QuestionAndChoices
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 
 class GameViewModelTest {
@@ -21,17 +15,16 @@ class GameViewModelTest {
     }
 
     /**
-    QGTC-01
+     * QGTC-01
      */
-
     @Test
     fun caseNumber1() {
         var actual: GameUiState = viewModel.init()
         var expected: GameUiState = GameUiState.AskedQuestion(
             question = "q1",
-            choices = listOf<String>("c1", "c2", "c3", "c4")
+            choices = listOf("c1", "c2", "c3", "c4")
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseFirst()
         expected = GameUiState.ChoiceMade(
@@ -42,7 +35,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.check()
         expected = GameUiState.AnswerChecked(
@@ -53,14 +46,14 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.next()
         expected = GameUiState.AskedQuestion(
             question = "q2",
             choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseFirst()
         expected = GameUiState.ChoiceMade(
@@ -71,7 +64,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.check()
         expected = GameUiState.AnswerChecked(
@@ -82,21 +75,24 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.next()
         expected = GameUiState.Finish
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
     }
 
+    /**
+     * QGTC-02
+     */
     @Test
     fun caseNumber2() {
         var actual: GameUiState = viewModel.init()
         var expected: GameUiState = GameUiState.AskedQuestion(
             question = "q1",
-            choices = listOf<String>("c1", "c2", "c3", "c4")
+            choices = listOf("c1", "c2", "c3", "c4")
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseFirst()
         expected = GameUiState.ChoiceMade(
@@ -107,7 +103,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseSecond()
         expected = GameUiState.ChoiceMade(
@@ -118,7 +114,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseThird()
         expected = GameUiState.ChoiceMade(
@@ -129,7 +125,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.chooseForth()
         expected = GameUiState.ChoiceMade(
@@ -140,7 +136,7 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.check()
         expected = GameUiState.AnswerChecked(
@@ -151,15 +147,14 @@ class GameViewModelTest {
                 ChoiceUiState.Incorrect,
             )
         )
-        assertEquals(expected, actual)
+        Assert.assertEquals(expected, actual)
 
         actual = viewModel.next()
         expected = GameUiState.AskedQuestion(
             question = "q2",
-            choices = listOf<String>("cd1", "cd2", "cd3", "cd4")
+            choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(expected, actual)
-
+        Assert.assertEquals(expected, actual)
     }
 }
 

@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.n857l.quizgame.GameUiState
-import ru.n857l.quizgame.core.MyApplication
+import ru.n857l.quizgame.core.QuizApp
 import ru.n857l.quizgame.databinding.FragmentGameBinding
 import ru.n857l.quizgame.stats.NavigateToGameOver
 
@@ -29,7 +28,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var uiState: GameUiState
-        val viewModel = (requireActivity().application as MyApplication).gameViewModel
+        val viewModel = (requireActivity().application as QuizApp).gameViewModel
 
         val update: () -> Unit = {
             uiState.update(
@@ -41,7 +40,7 @@ class GameFragment : Fragment() {
                 binding.nextButton,
                 binding.checkButton
             )
-            (requireActivity() as NavigateToGameOver).navigateToGameOver()
+            uiState.navigate(requireActivity() as NavigateToGameOver)
         }
 
         binding.firstChoiceButton.setOnClickListener {
