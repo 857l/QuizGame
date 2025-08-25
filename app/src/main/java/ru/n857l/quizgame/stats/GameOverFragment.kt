@@ -35,6 +35,8 @@ class GameOverFragment : Fragment() {
         binding.newGameButton.setOnClickListener {
             (requireActivity() as NavigateToGame).navigateToGame()
         }
+
+        viewModel.clear()
     }
 
     override fun onDestroyView() {
