@@ -1,10 +1,13 @@
 package ru.n857l.quizgame.game
 
+import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 
 class GameViewModel(
+    private val clearViewModel: ClearViewModel,
     private val repository: GameRepository
-) {
+) : MyViewModel {
 
     fun chooseFirst(): GameUiState {
         repository.saveUserChoice(0)
@@ -79,6 +82,7 @@ class GameViewModel(
         repository.next()
         return if (repository.isLastQuestion()) {
             repository.clear()
+            clearViewModel.clear(GameViewModel::class.java)
             GameUiState.Finish
         } else
             init()
@@ -95,5 +99,4 @@ class GameViewModel(
             return GameUiState.Empty
         }
     }
-
 }

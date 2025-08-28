@@ -1,37 +1,27 @@
 package ru.n857l.quizgame.core
 
 import android.app.Application
-import ru.n857l.quizgame.game.GameRepository
-import ru.n857l.quizgame.game.GameViewModel
-import ru.n857l.quizgame.stats.GameOverViewModel
-import ru.n857l.quizgame.stats.StatsRepository
+import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.di.ClearViewModel
+import ru.n857l.quizgame.di.Core
+import ru.n857l.quizgame.di.ManageViewModels
+import ru.n857l.quizgame.di.ProvideViewModel
 
-class QuizApp : Application() {
+class QuizApp : Application(), ProvideViewModel {
 
-    lateinit var gameViewModel: GameViewModel
-    lateinit var gameOverViewModel: GameOverViewModel
+    private lateinit var factory: ManageViewModels
 
     override fun onCreate() {
         super.onCreate()
 
-        val sharedPreferences = getSharedPreferences("QuizAppData", MODE_PRIVATE)
-        val corrects = IntCache.Base(sharedPreferences, "corrects", 0)
-        val incorrects = IntCache.Base(sharedPreferences, "incorrects", 0)
-
-        gameViewModel = GameViewModel(
-            GameRepository.Base(
-                corrects,
-                incorrects,
-                IntCache.Base(sharedPreferences, "index", 0),
-                IntCache.Base(sharedPreferences, "userChoiceIndex", -1)
-            )
-        )
-
-        gameOverViewModel = GameOverViewModel(
-            StatsRepository.Base(
-                corrects,
-                incorrects,
-            )
-        )
+        val clearViewModel = object : ClearViewModel {
+            override fun clear(viewModelClass: Class<out MyViewModel>) =
+                factory.clear(viewModelClass)
+        }
+        val make = ProvideViewModel.Make(Core(this, clearViewModel))
+        factory = ManageViewModels.Factory(make)
     }
+
+    override fun <T : MyViewModel> makeViewModel(clasz: Class<T>): T =
+        factory.makeViewModel(clasz)
 }

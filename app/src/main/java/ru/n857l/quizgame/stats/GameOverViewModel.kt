@@ -1,8 +1,13 @@
 package ru.n857l.quizgame.stats
 
+import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.views.stats.StatsUiState
 
-class GameOverViewModel(private val repository: StatsRepository) {
+class GameOverViewModel(
+    private val clearViewModel: ClearViewModel,
+    private val repository: StatsRepository
+) : MyViewModel {
 
     fun init(isFirstRun: Boolean): StatsUiState {
         return if (isFirstRun) {
@@ -12,5 +17,9 @@ class GameOverViewModel(private val repository: StatsRepository) {
         } else {
             StatsUiState.Empty
         }
+    }
+
+    fun clear() {
+        clearViewModel.clear(GameOverViewModel::class.java)
     }
 }
