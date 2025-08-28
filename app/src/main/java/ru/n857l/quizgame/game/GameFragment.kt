@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.n857l.quizgame.core.QuizApp
 import ru.n857l.quizgame.databinding.FragmentGameBinding
+import ru.n857l.quizgame.di.ProvideViewModel
 import ru.n857l.quizgame.stats.NavigateToGameOver
 
 class GameFragment : Fragment() {
@@ -28,7 +29,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var uiState: GameUiState
-        val viewModel = (requireActivity().application as QuizApp).gameViewModel
+        val viewModel: GameViewModel = (requireActivity() as ProvideViewModel).makeViewModel(GameViewModel::class.java)
 
         val update: () -> Unit = {
             uiState.update(
