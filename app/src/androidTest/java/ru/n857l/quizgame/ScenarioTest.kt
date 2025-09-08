@@ -143,6 +143,7 @@ class ScenarioTest {
 
         //region 1 correct and 1 incorrect
         setup()
+        caseNumber4()
 
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
@@ -194,6 +195,7 @@ class ScenarioTest {
 
         //region 2 corrects
         setup()
+        caseNumber4()
 
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
@@ -244,6 +246,12 @@ class ScenarioTest {
     @Test
     fun caseNumber4() {
         val loadPage = LoadPage()
+
+        loadPage.assertProgressState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillError()
 
         loadPage.assertErrorState()
         activityScenarioRule.scenario.recreate()
