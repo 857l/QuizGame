@@ -143,6 +143,7 @@ class ScenarioTest {
 
         //region 1 correct and 1 incorrect
         setup()
+        caseNumber4()
 
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
@@ -194,6 +195,7 @@ class ScenarioTest {
 
         //region 2 corrects
         setup()
+        caseNumber4()
 
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
@@ -236,5 +238,35 @@ class ScenarioTest {
         activityScenarioRule.scenario.recreate()
         gameOverPage.assertInitialState()
         //endregion
+    }
+
+    /**
+     * QGTC-04
+     */
+    @Test
+    fun caseNumber4() {
+        val loadPage = LoadPage()
+
+        loadPage.assertProgressState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillError()
+
+        loadPage.assertErrorState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertErrorState()
+
+        loadPage.clickRetry()
+
+        loadPage.assertProgressState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillGone()
+
+        gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
     }
 }
