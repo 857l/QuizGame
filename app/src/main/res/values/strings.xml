@@ -4,4 +4,6 @@
     <string name="next" translatable="false">next</string>
     <string name="new_game">Start a new game</string>
     <string name="stats">Game Over\n\nCorrects: %d\nIncorrects: %d</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="retry">retry</string>
 </resources>
