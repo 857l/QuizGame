@@ -14,7 +14,7 @@ class GameViewModelTest {
     @Before
     fun setup() {
         repository = FakeRepository()
-        viewModel = GameViewModel(repository = repository)
+        viewModel = GameViewModel(FakeClearViewModel(), repository = repository)
     }
 
     /**
