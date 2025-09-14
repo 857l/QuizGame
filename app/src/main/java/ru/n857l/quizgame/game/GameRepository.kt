@@ -1,6 +1,8 @@
 package ru.n857l.quizgame.game
 
 import ru.n857l.quizgame.core.IntCache
+import ru.n857l.quizgame.core.StringCache
+import ru.n857l.quizgame.load.ParseQuestionAndChoices
 
 interface GameRepository {
 
@@ -34,6 +36,32 @@ interface GameRepository {
             )
         )
     ) : GameRepository {
+
+        constructor(
+            corrects: IntCache,
+            incorrects: IntCache,
+            index: IntCache,
+            userChoiceIndex: IntCache,
+            dataCache: StringCache,
+            parseQuestionAndChoices: ParseQuestionAndChoices
+        ) : this(
+            corrects,
+            incorrects,
+            index,
+            userChoiceIndex,
+            parseQuestionAndChoices.parse(dataCache.read()).results.map {
+                val list = mutableListOf<String>()
+                list.add(it.correct_answer)
+                list.addAll(it.incorrect_answers)
+                val finalList = list.shuffled()
+                val indexOfCorrect = finalList.indexOf(it.correct_answer)
+                QuestionAndChoices(
+                    it.question,
+                    finalList,
+                    indexOfCorrect
+                )
+            }
+        )
 
         override fun questionAndChoices(): QuestionAndChoices {
             return list[index.read()]
