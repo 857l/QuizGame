@@ -14,6 +14,7 @@ interface ProvideViewModel {
 
         init {
             chain = Error()
+            chain = ProvideLoadViewModel(core, chain)
             chain = ProvideGameViewModel(core, chain)
             chain = ProvideGameOverViewModel(core, chain)
         }
