@@ -8,8 +8,8 @@ import ru.n857l.quizgame.di.Module
 import ru.n857l.quizgame.di.ProvideViewModel
 import ru.n857l.quizgame.game.GameRepository
 import ru.n857l.quizgame.game.GameViewModel
-import ru.n857l.quizgame.load.ParseQuestionAndChoices
-import ru.n857l.quizgame.load.Response
+import ru.n857l.quizgame.load.data.ParseQuestionAndChoices
+import ru.n857l.quizgame.load.data.QuizResponse
 
 class GameModule(private val core: Core) : Module<GameViewModel> {
 
@@ -18,7 +18,7 @@ class GameModule(private val core: Core) : Module<GameViewModel> {
         val incorrects = IntCache.Base(core.sharedPreferences, "incorrects", 0)
 
 
-        val responseDefault = Response(-1, emptyList())
+        val responseDefault = QuizResponse(-1, emptyList())
         val defaultResponse = core.gson.toJson(responseDefault)
         return GameViewModel(
             core.clearViewModel,

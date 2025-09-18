@@ -1,20 +1,39 @@
 package ru.n857l.quizgame.load
 
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
+import ru.n857l.quizgame.load.data.RunAsync
+import ru.n857l.quizgame.load.data.LoadRepository
+import ru.n857l.quizgame.load.data.LoadResult
+import ru.n857l.quizgame.load.presentation.LoadUiState
+import ru.n857l.quizgame.load.presentation.LoadViewModel
+import ru.n857l.quizgame.load.presentation.UiObservable
 
 class LoadViewModelTest {
 
+    private lateinit var repository: FakeLoadRepository
+    private lateinit var observable: FakeUiObservable
+    private lateinit var runAsync: FakeRunAsync
+    private lateinit var viewModel: LoadViewModel
+    private lateinit var fragment: FakeFragment
+
+    @Before
+    fun setup() {
+        repository = FakeLoadRepository()
+        observable = FakeUiObservable()
+        runAsync = FakeRunAsync()
+        viewModel = LoadViewModel(
+            repository = repository,
+            observable = observable,
+            runAsync = runAsync
+        )
+        fragment = FakeFragment()
+    }
+
     @Test
     fun sameFragment() {
-        val repository = FakeLoadRepository()
         repository.expectResult(LoadResult.Success)
-        val observable = FakeUiObservable()
-        val viewModel = LoadViewModel(
-            repository = repository,
-            observable = observable
-        )
-        val fragment = FakeFragment()
 
         viewModel.load(isFirstRun = true)//onViewCreated first time
         assertEquals(LoadUiState.Progress, observable.postUiStateCalledList.first())
@@ -34,7 +53,7 @@ class LoadViewModelTest {
         )//give cached progress ui state to fragment
         assertEquals(1, fragment.statesList.size)
 
-        repository.returnResult()//get data from server
+        runAsync.returnResult()//get data from server
         assertEquals(LoadUiState.Success, observable.postUiStateCalledList[1])
         assertEquals(2, observable.postUiStateCalledList.size)
         assertEquals(LoadUiState.Success, fragment.statesList[1])
@@ -43,14 +62,7 @@ class LoadViewModelTest {
 
     @Test
     fun recreateActivity() {
-        val repository = FakeLoadRepository()
         repository.expectResult(LoadResult.Error(message = "no internet"))
-        val observable = FakeUiObservable()
-        val viewModel = LoadViewModel(
-            repository = repository,
-            observable = observable
-        )
-        val fragment = FakeFragment()
 
         viewModel.load(isFirstRun = true)//onViewCreated first time
         assertEquals(LoadUiState.Progress, observable.postUiStateCalledList.first())
@@ -69,7 +81,7 @@ class LoadViewModelTest {
         viewModel.stopUpdates()//onPause and activity death (onStop, onDestroy)
         assertEquals(1, observable.unregisterCalledCount)
 
-        repository.returnResult() //provides Error to observable
+        runAsync.returnResult() //provides Error to observable
         assertEquals(1, fragment.statesList.size)
         assertEquals(
             LoadUiState.Error(message = "no internet"),
@@ -92,7 +104,6 @@ class LoadViewModelTest {
             newInstanceOfFragment.statesList.first()
         )
         assertEquals(1, newInstanceOfFragment.statesList.size)
-
     }
 }
 
@@ -108,20 +119,16 @@ private class FakeFragment : (LoadUiState) -> Unit {
 private class FakeLoadRepository : LoadRepository {
 
     private var loadResult: LoadResult? = null
-    private var loadResultCallback: (LoadResult) -> Unit = {}
 
     fun expectResult(loadResult: LoadResult) {
         this.loadResult = loadResult
     }
 
     var loadCalledCount = 0
-    override fun load(resultCallback: (LoadResult) -> Unit) {
-        loadCalledCount++
-        loadResultCallback = resultCallback
-    }
 
-    fun returnResult() {
-        loadResultCallback.invoke(loadResult!!)
+    override fun load(): LoadResult {
+        loadCalledCount++
+        return loadResult!!
     }
 }
 
@@ -157,5 +164,21 @@ private class FakeUiObservable : UiObservable {
             observerCached!!.invoke(uiState)
             uiStateCached = null
         }
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+private class FakeRunAsync : RunAsync {
+
+    private var result: Any? = null
+    private var ui: (Any) -> Unit = {}
+
+    override fun <T : Any> handleAsync(heavyOperation: () -> T, uiUpdate: (T) -> Unit) {
+        result = heavyOperation.invoke()
+        ui = uiUpdate as (Any) -> Unit
+    }
+
+    fun returnResult() {
+        ui.invoke(result!!)
     }
 }

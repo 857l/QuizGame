@@ -9,6 +9,7 @@ import org.junit.Before
 import org.junit.Rule
 import ru.n857l.quizgame.core.MainActivity
 import ru.n857l.quizgame.game.GamePage
+import ru.n857l.quizgame.load.LoadPage
 
 /**
  * Instrumented test, which will execute on an Android device.

@@ -3,13 +3,12 @@ package ru.n857l.quizgame.core
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import ru.n857l.quizgame.MyViewModel
-import ru.n857l.quizgame.NavigateToLoad
+import ru.n857l.quizgame.load.presentation.NavigateToLoad
 import ru.n857l.quizgame.R
 import ru.n857l.quizgame.di.ProvideViewModel
 import ru.n857l.quizgame.game.GameScreen
 import ru.n857l.quizgame.game.NavigateToGame
-import ru.n857l.quizgame.load.LoadScreen
+import ru.n857l.quizgame.load.presentation.LoadScreen
 import ru.n857l.quizgame.stats.GameOverScreen
 import ru.n857l.quizgame.stats.NavigateToGameOver
 

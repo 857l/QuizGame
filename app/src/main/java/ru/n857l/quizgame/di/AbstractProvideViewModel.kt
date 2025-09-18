@@ -1,6 +1,6 @@
 package ru.n857l.quizgame.di
 
-import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.core.MyViewModel
 
 abstract class AbstractProvideViewModel(
     protected val core: Core,

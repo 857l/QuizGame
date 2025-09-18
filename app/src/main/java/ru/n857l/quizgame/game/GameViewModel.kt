@@ -1,6 +1,6 @@
 package ru.n857l.quizgame.game
 
-import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.core.MyViewModel
 import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 

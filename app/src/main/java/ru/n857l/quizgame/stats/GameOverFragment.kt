@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.n857l.quizgame.load.presentation.NavigateToLoad
 import ru.n857l.quizgame.databinding.FragmentGameOverBinding
 import ru.n857l.quizgame.di.ProvideViewModel
-import ru.n857l.quizgame.game.NavigateToGame
 
 class GameOverFragment : Fragment() {
 
@@ -32,7 +32,7 @@ class GameOverFragment : Fragment() {
 
         binding.newGameButton.setOnClickListener {
             viewModel.clear()
-            (requireActivity() as NavigateToGame).navigateToGame()
+            (requireActivity() as NavigateToLoad).navigateToLoad()
         }
 
         val uiState = viewModel.init(savedInstanceState == null)

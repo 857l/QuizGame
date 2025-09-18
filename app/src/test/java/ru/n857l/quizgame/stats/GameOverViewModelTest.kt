@@ -2,6 +2,7 @@ package ru.n857l.quizgame.stats
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import ru.n857l.quizgame.game.FakeClearViewModel
 import ru.n857l.quizgame.views.stats.StatsUiState
 
 class GameOverViewModelTest {

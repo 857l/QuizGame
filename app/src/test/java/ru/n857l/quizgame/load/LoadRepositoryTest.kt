@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
+import ru.n857l.quizgame.load.data.QuestionAndChoicesCloud
 import java.net.HttpURLConnection
 import java.net.URL
 

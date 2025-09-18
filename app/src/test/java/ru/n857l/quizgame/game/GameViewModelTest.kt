@@ -4,6 +4,8 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Assert
 import org.junit.Test
 import org.junit.Before
+import ru.n857l.quizgame.core.MyViewModel
+import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 
 class GameViewModelTest {
@@ -210,5 +212,11 @@ private class FakeRepository : GameRepository {
 
     override fun clear() {
         clearCalled = true
+    }
+}
+
+class FakeClearViewModel : ClearViewModel {
+    override fun clear(viewModelClass: Class<out MyViewModel>) {
+
     }
 }
