@@ -1,5 +1,6 @@
 package ru.n857l.quizgame.di
 
+import ru.n857l.quizgame.RunAsync
 import ru.n857l.quizgame.core.StringCache
 import ru.n857l.quizgame.load.LoadRepository
 import ru.n857l.quizgame.load.LoadViewModel
@@ -23,7 +24,8 @@ class LoadModule(private val core: Core) : Module<LoadViewModel> {
                 ParseQuestionAndChoices.Base(core.gson),
                 StringCache.Base(core.sharedPreferences, "response_data", defaultResponse)
             ),
-            UiObservable.Base()
+            UiObservable.Base(),
+            RunAsync.Base()
         )
     }
 }
