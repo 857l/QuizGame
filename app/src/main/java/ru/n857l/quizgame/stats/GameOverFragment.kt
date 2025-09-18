@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.n857l.quizgame.NavigateToLoad
+import ru.n857l.quizgame.load.presentation.NavigateToLoad
 import ru.n857l.quizgame.databinding.FragmentGameOverBinding
 import ru.n857l.quizgame.di.ProvideViewModel
 

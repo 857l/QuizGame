@@ -1,7 +1,6 @@
 package ru.n857l.quizgame.core
 
 import android.app.Application
-import ru.n857l.quizgame.MyViewModel
 import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.di.Core
 import ru.n857l.quizgame.di.ManageViewModels

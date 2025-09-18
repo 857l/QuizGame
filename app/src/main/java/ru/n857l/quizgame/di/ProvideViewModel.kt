@@ -1,7 +1,8 @@
 package ru.n857l.quizgame.di
 
-import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.core.MyViewModel
 import ru.n857l.quizgame.game.di.ProvideGameViewModel
+import ru.n857l.quizgame.game.di.ProvideLoadViewModel
 import ru.n857l.quizgame.stats.di.ProvideGameOverViewModel
 
 interface ProvideViewModel {

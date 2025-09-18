@@ -3,7 +3,12 @@ package ru.n857l.quizgame.load
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import ru.n857l.quizgame.RunAsync
+import ru.n857l.quizgame.load.data.RunAsync
+import ru.n857l.quizgame.load.data.LoadRepository
+import ru.n857l.quizgame.load.data.LoadResult
+import ru.n857l.quizgame.load.presentation.LoadUiState
+import ru.n857l.quizgame.load.presentation.LoadViewModel
+import ru.n857l.quizgame.load.presentation.UiObservable
 
 class LoadViewModelTest {
 

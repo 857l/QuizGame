@@ -4,7 +4,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Assert
 import org.junit.Test
 import org.junit.Before
-import ru.n857l.quizgame.MyViewModel
+import ru.n857l.quizgame.core.MyViewModel
 import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.views.choice.ChoiceUiState
 
