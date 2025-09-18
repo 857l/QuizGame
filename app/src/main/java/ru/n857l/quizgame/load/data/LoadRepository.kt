@@ -1,41 +1,40 @@
-package ru.n857l.quizgame.load
+package ru.n857l.quizgame.load.data
 
 import com.google.gson.Gson
 import ru.n857l.quizgame.core.StringCache
-import java.net.HttpURLConnection
-import java.net.URL
 
 interface LoadRepository {
 
     fun load(): LoadResult
 
     class Base(
+        private val service: QuizService,
         private val parseQuestionAndChoices: ParseQuestionAndChoices,
         private val dataCache: StringCache,
     ) : LoadRepository {
 
-        private val url = "https://opentdb.com/api.php?amount=10&type=multiple"
-
         override fun load(): LoadResult {
-            val connection = URL(url).openConnection() as HttpURLConnection
             try {
-                val data: String = connection.inputStream.bufferedReader().use { it.readText() }
-                val response = parseQuestionAndChoices.parse(data)
-                if (response.response_code == 0) {
-                    val list = response.results
-                    if (list.isEmpty()) {
-                        return (LoadResult.Error("Empty data, try again later"))
+                val result = service.questionAndChoices().execute()
+                if (result.isSuccessful) {
+                    val body = result.body()!!
+                    if (body.responseCode == 0) {
+                        val list = body.dataList
+                        if (list.isEmpty()) {
+                            return (LoadResult.Error("Empty data, try again later"))
+                        } else {
+                            val data = parseQuestionAndChoices.toString(body)
+                            dataCache.save(data)
+                            return (LoadResult.Success)
+                        }
                     } else {
-                        dataCache.save(data)
-                        return (LoadResult.Success)
+                        return (LoadResult.Error(handleResponseCode(result.body()!!.responseCode)))
                     }
                 } else {
-                    return (LoadResult.Error(handleResponseCode(response.response_code)))
+                    return (LoadResult.Error(handleResponseCode(result.body()!!.responseCode)))
                 }
             } catch (e: Exception) {
                 return (LoadResult.Error(e.message ?: "error"))
-            } finally {
-                connection.disconnect()
             }
         }
 
@@ -54,26 +53,20 @@ interface LoadRepository {
 
 interface ParseQuestionAndChoices {
 
-    fun parse(source: String): Response
+    fun toString(data: Any): String
+
+    fun parse(source: String): QuizResponse
 
     class Base(
         private val gson: Gson
     ) : ParseQuestionAndChoices {
 
-        override fun parse(source: String): Response {
-            return gson.fromJson(source, Response::class.java)
+        override fun toString(data: Any): String {
+            return gson.toJson(data)
+        }
+
+        override fun parse(source: String): QuizResponse {
+            return gson.fromJson(source, QuizResponse::class.java)
         }
     }
 }
-
-data class Response(
-    val response_code: Int,
-    val results: List<QuestionAndChoicesCloud>
-)
-
-data class QuestionAndChoicesCloud(
-    //todo SerializedName
-    val question: String,
-    val correct_answer: String,
-    val incorrect_answers: List<String>
-)

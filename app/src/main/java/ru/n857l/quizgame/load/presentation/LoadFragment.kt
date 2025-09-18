@@ -1,4 +1,4 @@
-package ru.n857l.quizgame.load
+package ru.n857l.quizgame.load.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package ru.n857l.quizgame.load
+package ru.n857l.quizgame.load.presentation
 
 import ru.n857l.quizgame.R
 import ru.n857l.quizgame.game.NavigateToGame

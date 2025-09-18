@@ -1,4 +1,4 @@
-package ru.n857l.quizgame.load
+package ru.n857l.quizgame.load.data
 
 interface LoadResult {
 

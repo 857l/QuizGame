@@ -1,7 +1,8 @@
-package ru.n857l.quizgame.load
+package ru.n857l.quizgame.load.presentation
 
-import ru.n857l.quizgame.MyViewModel
-import ru.n857l.quizgame.RunAsync
+import ru.n857l.quizgame.core.MyViewModel
+import ru.n857l.quizgame.load.data.RunAsync
+import ru.n857l.quizgame.load.data.LoadRepository
 
 class LoadViewModel(
     private val repository: LoadRepository,
