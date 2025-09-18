@@ -2,7 +2,7 @@ package ru.n857l.quizgame.game
 
 import ru.n857l.quizgame.core.IntCache
 import ru.n857l.quizgame.core.StringCache
-import ru.n857l.quizgame.load.ParseQuestionAndChoices
+import ru.n857l.quizgame.load.data.ParseQuestionAndChoices
 
 interface GameRepository {
 
@@ -49,12 +49,12 @@ interface GameRepository {
             incorrects,
             index,
             userChoiceIndex,
-            parseQuestionAndChoices.parse(dataCache.read()).results.map {
+            parseQuestionAndChoices.parse(dataCache.read()).dataList.map {
                 val list = mutableListOf<String>()
-                list.add(it.correct_answer)
-                list.addAll(it.incorrect_answers)
+                list.add(it.correctAnswer)
+                list.addAll(it.incorrectAnswers)
                 val finalList = list.shuffled()
-                val indexOfCorrect = finalList.indexOf(it.correct_answer)
+                val indexOfCorrect = finalList.indexOf(it.correctAnswer)
                 QuestionAndChoices(
                     it.question,
                     finalList,
