@@ -1,6 +1,7 @@
 package ru.n857l.quizgame.load.data
 
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import ru.n857l.quizgame.core.StringCache
 
 interface LoadRepository {
@@ -47,6 +48,20 @@ interface LoadRepository {
                 5 -> "Rate Limit Too many requests have occurred. Each IP can only access the API once every 5 seconds."
                 else -> ""
             }
+        }
+    }
+
+    class Fake : LoadRepository {
+
+        private var count = 0
+
+        override suspend fun load(): LoadResult {
+            delay(3000)
+            return if (count == 0) {
+                count++
+                LoadResult.Error("")
+            } else
+                LoadResult.Success
         }
     }
 }

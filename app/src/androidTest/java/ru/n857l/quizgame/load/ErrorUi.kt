@@ -30,6 +30,7 @@ class ErrorUi(containerIdMatcher: Matcher<View>, classTypeMatcher: Matcher<View>
 
     fun assertVisible() {
         interaction.check(matches(isDisplayed()))
+            .check(matches(withText(R.string.no_internet_connection)))
     }
 
     fun assertNotVisible() {

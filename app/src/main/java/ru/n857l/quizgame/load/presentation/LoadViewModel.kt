@@ -4,13 +4,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import ru.n857l.quizgame.core.MyViewModel
+import ru.n857l.quizgame.di.ClearViewModel
 import ru.n857l.quizgame.load.data.RunAsync
 import ru.n857l.quizgame.load.data.LoadRepository
 
 class LoadViewModel(
     private val repository: LoadRepository,
     private val observable: UiObservable,
-    private val runAsync: RunAsync
+    private val runAsync: RunAsync,
+    private val clearViewModel: ClearViewModel
 ) : MyViewModel {
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -20,9 +22,10 @@ class LoadViewModel(
             observable.postUiState(LoadUiState.Progress)
             runAsync.handleAsync(viewModelScope, {
                 val result = repository.load()
-                if (result.isSuccessful())
+                if (result.isSuccessful()) {
+                    clearViewModel.clear(LoadViewModel::class.java)
                     LoadUiState.Success
-                else
+                } else
                     LoadUiState.Error(result.message())
             }) {
                 observable.postUiState(it)
